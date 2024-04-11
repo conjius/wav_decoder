@@ -3,4 +3,9 @@ project(wav_decoder)
 
 set(CMAKE_CXX_STANDARD 20)
 
-add_executable(wav_decoder main.cpp)
+add_executable(wav_decoder
+		src/main.cpp
+		src/ByteUtils.h
+		src/Reader.cpp
+		src/Reader.h
+)
