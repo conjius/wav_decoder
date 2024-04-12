@@ -1,4 +1,5 @@
 #pragma once
+#include <ranges>
 
 using std::vector, std::string;
 
