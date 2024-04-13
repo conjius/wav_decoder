@@ -5,7 +5,12 @@ set(CMAKE_CXX_STANDARD 20)
 
 add_executable(wav_decoder
 		src/main.cpp
-		src/ByteUtils.h
+		src/ByteUtils.hpp
 		src/FileReader.cpp
-		src/FileReader.h
+		src/FileReader.hpp
+		src/FileReaderReadResult.hpp
+		src/fx/FxProcessor.cpp
+		src/fx/FxProcessor.hpp
+		src/fx/FxProcessorInput.hpp
+		src/Converter.h
 )

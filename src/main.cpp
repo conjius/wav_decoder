@@ -1,7 +1,8 @@
 #include <iostream>
 #include <ranges>
 #include "include/cli11/CLI11.hpp"
-#include "FileReader.h"
+#include "FileReader.hpp"
+#include "fx/FxProcessor.hpp"
 
 using std::string, std::endl, std::cout, std::vector;
 
@@ -34,10 +35,16 @@ int main(const int argc, char* argv[]) {
     string inputFilePath;
     app.add_option("-i,--inputFilePath", inputFilePath,
                    "The path of the .wav file to decode.");
+
+    // string fxNames;
+    // app.add_option("--fx", fxNames,
+    //                "A list of audio effects to apply to the input file.");
     CLI11_PARSE(app, argc, argv);
 
-    const auto reader = FileReader(inputFilePath);
-    reader.read();
+    auto reader = FileReader(inputFilePath);
+    auto byteBuffer = reader.read();
 
+
+    // auto fxProcessor = FxProcessor(byteBuffer, fxNames);
     return 0;
 }
