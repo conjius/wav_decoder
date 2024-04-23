@@ -26,8 +26,14 @@ add_executable(${PROJECT_NAME}
 		src/fx/EffectBuilder.cpp
 )
 
+# Find required packages
 find_package(fmt REQUIRED)
 find_package(spdlog REQUIRED)
-target_link_libraries(${PROJECT_NAME} PRIVATE spdlog::spdlog fmt::fmt)
 find_package(CLI11 REQUIRED)
-target_link_libraries(${PROJECT_NAME} PRIVATE CLI11::CLI11)
+
+# Find RtAudio via pkg-config
+find_package(PkgConfig REQUIRED)
+pkg_check_modules(RtAudio REQUIRED IMPORTED_TARGET rtaudio)
+
+# Include directories
+target_link_libraries(${PROJECT_NAME} PRIVATE spdlog::spdlog fmt::fmt CLI11::CLI11 PkgConfig::RtAudio)
