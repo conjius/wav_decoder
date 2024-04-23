@@ -10,7 +10,6 @@ shared_ptr<Effect> EffectBuilder::from(const string& name, const string& valueSt
     throw CLI::ValidationError(
         "Unsupported effect provided: {}. Supported effects are [volume]", name
     );
-    return nullptr;
 }
 
 void EffectBuilder::resetInputStringStream(std::istringstream& iss, const string& str) {

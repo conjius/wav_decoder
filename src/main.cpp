@@ -2,6 +2,7 @@
 #include "FileReader.hpp"
 #include "cli/CliArgParser.hpp"
 #include "fx/FxProcessor.hpp"
+#include "player/AudioPlayer.h"
 
 using std::string, std::endl, std::vector;
 
@@ -36,7 +37,10 @@ int main(const int argc, char* argv[]) {
     auto reader = FileReader(inputFilePathString);
     const auto fileReaderReadResult = reader.read();
 
-    auto fxProcessor = FxProcessor(fileReaderReadResult, effects);
+    const auto fxProcessor = FxProcessor(fileReaderReadResult, effects);
     fxProcessor.apply();
+
+    const auto player = AudioPlayer(fileReaderReadResult.data);
+    player.play();
     return 0;
 }

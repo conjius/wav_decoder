@@ -24,6 +24,8 @@ add_executable(${PROJECT_NAME}
 		src/cli/CliArgParser.cpp
 		src/cli/CliArgParser.hpp
 		src/fx/EffectBuilder.cpp
+		src/player/AudioPlayer.cpp
+		src/player/AudioPlayer.h
 )
 
 # Find required packages
