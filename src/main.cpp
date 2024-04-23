@@ -2,7 +2,6 @@
 #include "FileReader.hpp"
 #include "cli/CliArgParser.hpp"
 #include "fx/FxProcessor.hpp"
-#include "logger/Logger.hpp"
 
 using std::string, std::endl, std::vector;
 

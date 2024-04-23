@@ -21,9 +21,6 @@ add_executable(${PROJECT_NAME}
 		src/fx/Effect.hpp
 		src/fx/EffectBuilder.hpp
 
-		src/logger/Logger.cpp
-		src/logger/Logger.hpp
-
 		src/cli/CliArgParser.cpp
 		src/cli/CliArgParser.hpp
 		src/fx/EffectBuilder.cpp

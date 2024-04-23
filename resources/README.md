@@ -1,1 +1,1 @@
-You can place your test audio files here.
+This is where you would place your test audio files.

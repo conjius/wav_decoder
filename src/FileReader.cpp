@@ -4,7 +4,6 @@
 #include "ByteUtils.hpp"
 #include "Converter.hpp"
 #include "FileReaderReadResult.hpp"
-#include "logger/Logger.hpp"
 
 FileReader::FileReader(const std::string& inputFilePath) :
     inputFilePath(inputFilePath) {
