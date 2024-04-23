@@ -1,50 +1,43 @@
 #include <iostream>
-#include <ranges>
-#include "include/cli11/CLI11.hpp"
 #include "FileReader.hpp"
+#include "cli/CliArgParser.hpp"
 #include "fx/FxProcessor.hpp"
+#include "logger/Logger.hpp"
 
-using std::string, std::endl, std::cout, std::vector;
+using std::string, std::endl, std::vector;
 
 void printSplashText() {
-    cout << endl << ".wav file format specification taken from:" << endl
-        << "https://ccrma.stanford.edu/courses/422-winter-2014/projects/WaveFormat/"
-        << endl
-        << "Created by Danny Priymak"
-        << endl
-        << "https://github.com/daisp/wav_decoder"
-        << endl
-        << R"(                               _                    _           )"
-        << endl
-        << R"( __      ____ ___   __      __| | ___  ___ ___   __| | ___ _ __ )"
-        << endl
-        << R"( \ \ /\ / / _` \ \ / /____ / _` |/ _ \/ __/ _ \ / _` |/ _ \ '__|)"
-        << endl
-        << R"(  \ V  V / (_| |\ V /_____| (_| |  __/ (_| (_) | (_| |  __/ |   )"
-        << endl
-        << R"(   \_/\_/ \__,_| \_/       \__,_|\___|\___\___/ \__,_|\___|_|   )"
-        << endl << endl;
+    spdlog::info("\n.wav file format specification taken from:");
+    spdlog::info(
+        "https://ccrma.stanford.edu/courses/422-winter-2014/projects/WaveFormat/\n"
+    );
+    spdlog::info("Created by Danny Priymak");
+    spdlog::info("https://github.com/daisp/wav_decoder");
+    spdlog::info(R"(                               _                    _           )");
+    spdlog::info(R"( __      ____ ___   __      __| | ___  ___ ___   __| | ___ _ __ )");
+    spdlog::info(R"( \ \ /\ / / _` \ \ / /____ / _` |/ _ \/ __/ _ \ / _` |/ _ \ '__|)");
+    spdlog::info(R"(  \ V  V / (_| |\ V /_____| (_| |  __/ (_| (_) | (_| |  __/ |   )");
+    spdlog::info(
+        R"(   \_/\_/ \__,_| \_/       \__,_|\___|\___\___/ \__,_|\___|_|   )""\n");
 }
 
 
 int main(const int argc, char* argv[]) {
+    const auto cliArgParser = CliArgParser(argc, argv);
+    const auto [
+        inputFilePathString,
+        logLevelString,
+        isQuiet,
+        effects
+    ] = cliArgParser.parse();
+
+    spdlog::set_level(isQuiet ? spdlog::level::err : spdlog::level::info);
     printSplashText();
-    CLI::App app{".wav file decoder"};
-    argv = app.ensure_utf8(argv);
 
-    string inputFilePath;
-    app.add_option("-i,--inputFilePath", inputFilePath,
-                   "The path of the .wav file to decode.");
+    auto reader = FileReader(inputFilePathString);
+    const auto fileReaderReadResult = reader.read();
 
-    // string fxNames;
-    // app.add_option("--fx", fxNames,
-    //                "A list of audio effects to apply to the input file.");
-    CLI11_PARSE(app, argc, argv);
-
-    auto reader = FileReader(inputFilePath);
-    auto byteBuffer = reader.read();
-
-
-    // auto fxProcessor = FxProcessor(byteBuffer, fxNames);
+    auto fxProcessor = FxProcessor(fileReaderReadResult, effects);
+    fxProcessor.apply();
     return 0;
 }

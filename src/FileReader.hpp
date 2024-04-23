@@ -4,7 +4,7 @@
 #include "FileReaderReadResult.hpp"
 
 using std::cout, std::endl, std::vector, std::string, std::unique_ptr, std::make_unique;
-
+using DataView = take_view<drop_view<ref_view<vector<uint8_t>>>>;
 
 class FileReader {
 public:
@@ -27,7 +27,7 @@ private:
     [[nodiscard]] int readFmtSubChunkBitsPerSample() const;
     [[nodiscard]] string readDataSubChunk2Id() const;
     [[nodiscard]] size_t readDataSubChunk2Size() const;
-    [[nodiscard]] take_view<drop_view<ref_view<vector<uint8_t>>>> generateDataView(
+    [[nodiscard]] DataView generateDataView(
         size_t bufferOffset,
         size_t dataSubChunk2Size
     ) const;

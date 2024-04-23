@@ -6,7 +6,7 @@ __      ____ ___   __      __| | ___  ___ ___   __| | ___ _ __
   \_/\_/ \__,_| \_/       \__,_|\___|\___\___/ \__,_|\___|_|   
 
 ```
-My custom C++20 .wav file decoder. Because why not?
+A C++20 .wav file decoder.
 
 .wav file format specification taken from:
 
