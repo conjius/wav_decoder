@@ -20,4 +20,4 @@ https://ccrma.stanford.edu/courses/422-winter-2014/projects/WaveFormat/
    `CMakeLists.txt`
 
 ### Usage
-```wav_decoder -i ./resources/CantinaBand3.wav -fx volume=0.5```
+```wav_decoder -i ./resources/CantinaBand3.wav --fx volume=0.5```
