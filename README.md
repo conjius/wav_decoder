@@ -11,3 +11,13 @@ A C++20 .wav file decoder.
 .wav file format specification taken from:
 
 https://ccrma.stanford.edu/courses/422-winter-2014/projects/WaveFormat/
+
+### Setup
+#### Installation Requirements
+1. `brew install cli11@2.4.1 spdlog@1.13.0`
+2. Make sure you have a CMake version installed whose version is at least the version 
+   stated in 
+   `CMakeLists.txt`
+
+### Usage
+```wav_decoder -i ./resources/CantinaBand3.wav -fx volume=0.5```
