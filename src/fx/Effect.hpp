@@ -10,13 +10,13 @@ public:
     Effect() = delete;
     virtual ~Effect() = default;
 
-    explicit Effect(const EffectValue& value) : value(value) {
+    explicit Effect(EffectValue value) : value(std::move(value)) {
     };
 
     virtual void apply(const DataView& dataView) = 0;
 
 protected:
-    const EffectValue& value;
+    const EffectValue value;
 };
 
 class VolumeEffect final : public Effect {

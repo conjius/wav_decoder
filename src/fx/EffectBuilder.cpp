@@ -5,7 +5,8 @@
 shared_ptr<Effect> EffectBuilder::from(const string& name, const string& valueString) {
     if (name == "volume") {
         const auto value = parseStringToArgValue(valueString);
-        return std::make_shared<VolumeEffect>(VolumeEffect{value});
+        auto volumeEffectPtr = std::make_shared<VolumeEffect>(VolumeEffect(value));
+        return volumeEffectPtr;
     }
     throw CLI::ValidationError(
         "Unsupported effect provided: {}. Supported effects are [volume]", name
