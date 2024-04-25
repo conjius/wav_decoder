@@ -5,7 +5,7 @@
 #include "FileReaderReadResult.hpp"
 
 using std::cout, std::endl, std::vector, std::string, std::unique_ptr, std::make_unique;
-using DataView = take_view<drop_view<ref_view<vector<uint8_t>>>>;
+using DataView = take_view<drop_view<ref_view<vector<uint16_t>>>>;
 
 class FileReader {
 public:
@@ -35,4 +35,5 @@ private:
 
     const string& inputFilePath;
     unique_ptr<vector<uint8_t>> byteBuffer;
+    unique_ptr<vector<uint16_t>> uint16Buffer;
 };

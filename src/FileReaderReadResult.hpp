@@ -26,5 +26,5 @@ struct FileReaderReadResult {
     string dataSubChunk2Id;
     size_t dataSubChunk2Size{};
 
-    take_view<drop_view<ref_view<vector<uint8_t>>>> data;
+    take_view<drop_view<ref_view<vector<uint16_t>>>> data;
 };

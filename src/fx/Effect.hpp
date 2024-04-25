@@ -26,7 +26,7 @@ public:
     }
 
     void apply(const DataView& dataView) override {
-        for (unsigned char& sample : dataView) {
+        for (uint16_t& sample : dataView) {
             sample *= std::get<float>(this->value);
         }
     }

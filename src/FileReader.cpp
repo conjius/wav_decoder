@@ -6,7 +6,8 @@
 #include "FileReaderReadResult.hpp"
 
 FileReader::FileReader(const std::string& inputFilePath) :
-    inputFilePath(inputFilePath) {
+    inputFilePath(inputFilePath),
+    uint16Buffer(std::make_unique<std::vector<uint16_t>>()) {
     std::ifstream input(inputFilePath, std::ios::binary);
     this->byteBuffer = make_unique<vector<uint8_t>>(
         vector<uint8_t>(std::istreambuf_iterator(input), {})
@@ -107,9 +108,22 @@ DataView FileReader::generateDataView(
     const size_t bufferOffset,
     const size_t dataSubChunk2Size
 ) const {
-    const auto dataView = *this->byteBuffer
+    if (dataSubChunk2Size % 2 != 0) {
+        throw std::runtime_error("dataSubChunk2Size must be an even number");
+    }
+    for (auto i = 0; i < dataSubChunk2Size; i += 2) {
+        this->uint16Buffer->insert(
+            this->uint16Buffer->begin() + i / 2,
+            static_cast<uint16_t>(
+                this->byteBuffer->at(bufferOffset + i)
+                | this->byteBuffer->at(bufferOffset + i + 1) << 8
+            )
+        );
+    }
+    const auto dataView = *this->uint16Buffer
         | std::views::drop(bufferOffset)
         | std::views::take(dataSubChunk2Size);
+
     return dataView;
 }
 
